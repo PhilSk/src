@@ -1,0 +1,19 @@
+.ui-dialog-titlebar {
+  background-color: blue;
+  background-image: none;
+    border-color: blue;
+    color: inherit;
+}
+
+.rel_date {
+    font-size: 12px;
+    color: #828282;
+}
+
+#ok-dialog {
+    display: none;
+}
+
+#comment_date, #comment_author {
+    font-size: 12px;
+}

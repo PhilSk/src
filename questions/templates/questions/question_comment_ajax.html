@@ -1,0 +1,14 @@
+<div class="row marketing">
+    <div class="col-lg-6">
+        <h1> Комментарии </h1>
+        {% for comment in question.comments.all %}
+            <div class="container well col-lg-4">
+                <div>{{comment.text}}</div>
+                <div id="comment_date"><i class="icon-clock2"></i> {{ question.pub_date}}</div>
+                <div id="comment_author">Автор: {{comment.author}}</div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+

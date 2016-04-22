@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load bootstrap %}
+{% block title %}{% endblock %}
+
+{% block content %}
+
+     <div class="row marketing ">
+        <div class="col-lg-4 well ">
+            <form method="post">
+                {% csrf_token %}
+                {{form|bootstrap}}
+                <button class="btn btn-primary btn-block" type="submit">Войти</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+

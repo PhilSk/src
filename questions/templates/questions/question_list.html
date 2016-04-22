@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load bootstrap %}
+
+{% block content %}
+ <div class="row p-b">
+     <div class="col-lg-9">
+             <div class="row panel panel-default">
+            {% for question in object_list %}
+                <div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12 well">
+						<div>
+							<div class="fh5co-post-text">
+								<h2><a href="{% url 'questions:question_view' pk=question.pk %}">{{ question.title }}</a></h2>
+								<p>{{ question.text }}</p>
+							</div>
+							<div class="fh5co-post-meta">
+                                <div><a>
+                                {% if question.is_published == True %}
+                                     <span class="label label-primary">Опубликован</span>
+                                {% else %}
+                                     <span class="label label-warning">Не опубликован</span>
+                                {% endif %}
+                                </a></div>
+								<a href="#"><i class="icon-life-ring"></i>{{ question.likes_count }}</a>
+								<a href="#"><i class="icon-scissors"></i>{{ question.comments_count }}</a>
+								<a href="#"><i class="icon-clock2"></i> {{ question.pub_date}}</a>
+							</div>
+						</div>
+					</div>
+            {% endfor %}
+            </div>
+
+        </div>
+
+        <div class="col-lg-2 sidebar-offcanvas" id="sidebar">
+            <form class="navbar-form navbar-left navbar-header">
+                {{ form|bootstrap }}
+                <button class="btn btn-sm btn-primary btn-block" type="submit">Искать</button>
+            </form>
+        </div>
+ </div>
+{% endblock %}
+
+

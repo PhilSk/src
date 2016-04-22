@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load bootstrap %}
+{% load widget_tweaks %}
+
+{% block content %}
+    <div class="col-lg-5 well">
+        <form method="post">
+            {%  csrf_token %}
+            {{ form.title | bootstrap}}
+            {{ form.text | bootstrap}}
+            {{ form.is_published | bootstrap}}
+            {{ form.topics|add_class:'form-control chosen-select'}}
+            <button class="btn btn-primary btn-block" type="submit">Создать вопрос</button>
+        </form>
+    </div>
+{% endblock %}
