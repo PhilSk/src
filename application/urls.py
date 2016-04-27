@@ -27,4 +27,6 @@ urlpatterns = [
     url(r'^questions/', include('questions.urls', namespace="questions")),
     url(r'^topics/', include('topics.urls', namespace="topics")),
     url(r'^core/', include('core.urls', namespace='core')),
+    url(r'^search/', include('haystack.urls', app_name='search', namespace='search')),
+
 ]

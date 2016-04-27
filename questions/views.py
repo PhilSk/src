@@ -42,7 +42,7 @@ class QuestionList(ListView):
     def dispatch(self, request, *args, **kwargs):
         self.form = QuestionListForm(request.GET)
         self.form.is_valid()
-        self.search = self.form.cleaned_data.get('search')
+        self.search = self.form.cleaned_data.get('___')
         self.sort_field = self.form.cleaned_data.get('sort_field')
         return super(QuestionList, self).dispatch(request, *args, **kwargs)
 

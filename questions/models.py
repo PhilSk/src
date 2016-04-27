@@ -2,6 +2,9 @@
 from __future__ import unicode_literals
 from django.db import models
 from django.conf import settings
+from django.dispatch import receiver
+
+from comments.models import Comment
 from topics.models import Topic
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
@@ -34,6 +37,18 @@ class Question(models.Model):
 
     def __unicode__(self):
        return self.title
+
+
+@receiver(models.signals.post_save, sender=Comment)
+def on_answer_creation(sender, instance, *args, **kwargs):
+    if kwargs.get('created'):
+        answer = instance
+        from .tasks import send_email_notification
+        send_email_notification.delay(
+            'd.isaev@corp.mail.ru',
+            'New answer to question "{}"'.format(answer.question.title),
+            'You got answer with the text: "{}"'.format(answer.text)
+        )
 
 
 

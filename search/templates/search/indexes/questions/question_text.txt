@@ -1,0 +1,5 @@
+{{ object.title }}
+{{ object.text }}
+{% for comment in object.comment_set.all %}
+  {{ comment.text }}
+{% endfor %}

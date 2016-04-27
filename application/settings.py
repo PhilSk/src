@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -37,13 +36,28 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'haystack',
     'core',
     'questions',
     'comments',
     'topics',
+    'search',
     'bootstrapform',
     'widget_tweaks',
+    'debug_panel',
+    'celery',
 ]
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH': os.path.join(os.path.dirname(__file__), 'whoosh_index'),
+    },
+}
+
+BROKER_URL = 'redis://localhost:6379/0'
+
+
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
@@ -53,7 +67,8 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware'
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_panel.middleware.DebugPanelMiddleware',
 ]
 
 ROOT_URLCONF = 'application.urls'
@@ -84,13 +99,13 @@ DATABASES = {
     'default': {
         'ENGINE':   'django.db.backends.mysql',
         'NAME':     'project_n_db',
+        'TEST_NAME': 'test_project_n_db',
 	'USER':     'project_n_dbuser',
 	'PASSWORD': 'password',
 	'HOST':     'localhost',
 	'PORT':     ''
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
